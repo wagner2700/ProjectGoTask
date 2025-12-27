@@ -12,12 +12,12 @@ import { ITask } from '../../interfaces/task.interface';
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { TaskStatus } from '../../types/task-status';
 import { TaskStatusEnum } from '../../enums/task-status.enum';
-import { throwError } from 'rxjs';
+
 
 
 @Component({
   selector: 'app-task-list-section',
-  imports: [TaskCardComponent,CdkDropList, CdkDrag, AsyncPipe, JsonPipe],
+  imports: [TaskCardComponent,CdkDropList, CdkDrag, AsyncPipe],
   templateUrl: './task-list-section.component.html',
   styleUrl: './task-list-section.component.css'
 })

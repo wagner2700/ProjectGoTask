@@ -5,10 +5,6 @@
 @let doneTasks = (this._taskService.doneTasks| async) ?? []; 
 
 
-<p>TODO: {{this._taskService.todoTasks | async | json}}</p>
-<p>DOING: {{this._taskService.doingTasks | async | json}}</p>
-<p>done: {{this._taskService.doneTasks | async | json}}</p>
-
 <div class="p-3 mb-6 flex overflow-auto scroll-hidden">
     <!-- Coluna A Fazer -->
     <div 

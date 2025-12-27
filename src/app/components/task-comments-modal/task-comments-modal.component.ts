@@ -9,26 +9,25 @@ import { ITask } from '../../interfaces/task.interface';
   selector: 'app-task-comments-modal',
   imports: [ReactiveFormsModule],
   templateUrl: './task-comments-modal.component.html',
-  styleUrl: './task-comments-modal.component.css'
+  styleUrl: './task-comments-modal.component.css',
 })
 export class TaskCommentsModalComponent {
-
   taskCommentChaged = false;
 
-  commentControl = new FormControl('',[Validators.required]);
+  commentControl = new FormControl('', [Validators.required]);
 
   @ViewChild('commentInput') commentInputRef!: ElementRef<HTMLInputElement>;
 
-  readonly _task : ITask = inject(DIALOG_DATA);
-  readonly _dialogReg: DialogRef<boolean> = inject(DialogRef)
+  readonly _task: ITask = inject(DIALOG_DATA);
+  readonly _dialogReg: DialogRef<boolean> = inject(DialogRef);
 
-  onAddComent(){
-    console.log('Comentário ', this.commentControl.value)
+  onAddComent() {
+    
     // Criar um comentário
-    const newComment : IComment = {
+    const newComment: IComment = {
       id: generateUniqueIdWithTimestamp(),
-      description:this.commentControl.value ? this.commentControl.value : ''
-    }
+      description: this.commentControl.value ? this.commentControl.value : '',
+    };
 
     //adicionar o novo comenário na lista de comentarios, na primeira posição da lista
     this._task.comments.unshift(newComment);
@@ -37,14 +36,19 @@ export class TaskCommentsModalComponent {
     this.commentControl.reset();
 
     // Atualizar a flag/prop  se houve alteração nos comentário
-    this.taskCommentChaged = true
+    this.taskCommentChaged = true;
 
-    // Focando no elemento 
+    // Focando no elemento
     this.commentInputRef.nativeElement.focus();
   }
 
-  onCloseModal(){
+  onCloseModal() {
     this._dialogReg.close(this.taskCommentChaged);
   }
 
+  onRemoveComment(comentId: string) {
+    this._task.comments = this._task.comments.filter((comment)=>comment.id !== comentId);
+
+    this.taskCommentChaged = true;
+  }
 }

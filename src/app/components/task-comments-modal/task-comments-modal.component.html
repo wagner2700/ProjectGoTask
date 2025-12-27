@@ -5,10 +5,10 @@
     <img class="ml-auto cursor-pointer" src="images/icon-close.svg" (click)="onCloseModal()" />
   </div>
   <div class="p-4 border-t border-[#D1D5DB]">
-    <h1 class="font-semibold text-lg mb-4">Minha nova tarefa</h1>
+    <h1 class="font-semibold text-lg mb-4">{{_task.name}}</h1>
     <p class="font-semibold text-sm mb-2">Descrição</p>
     <p class="font-normal text-base text-[#374151]">
-      Essa é a minha tarefa para criar um projeto Angular
+      Essa é {{_task.description}}
     </p>
   </div>
   <div class="p-4">
@@ -23,7 +23,6 @@
             type="text"
             class="rounded-lg border border-[#D1D5DB] p-3 bg-white flex-1 text-sm font-light"
             placeholder="Adicione um comentário"
-           
             [formControl]="commentControl" 
           />
           
@@ -55,6 +54,7 @@
               </p>
               <p
                 class="font-semibold text-xs underline underline-offset-2 cursor-pointer"
+                (click)="onRemoveComment(comment.id)"
               >
                 Apagar
               </p>
