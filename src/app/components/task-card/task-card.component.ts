@@ -24,8 +24,29 @@ export class TaskCardComponent {
 
     dialogRef.closed.subscribe((taskForm) => {
       console.log('Tarefa alterada : ', taskForm);
-      if(taskForm){
-        this._taskService.updateTaskNameAndDescription(this.task.id, this.task.status, taskForm.name, taskForm.description)
+      if (taskForm) {
+        this._taskService.updateTaskNameAndDescription(
+          this.task.id,
+          this.task.status,
+          taskForm.name,
+          taskForm.description,
+        );
+      }
+    });
+  }
+
+  openTaskCommentsModal() {
+    
+    const dialogRef = this._modalControllerService.openTaskCommentsModal(
+      this.task,
+    );
+
+    dialogRef.closed.subscribe((taskCommentChange) => {
+      if (taskCommentChange) {
+
+        console.log('Tarefa atualizada ' , this.task)
+
+        this._taskService.updateTaskComments(this.task.id, this.task.status , this.task.comments);
       }
     });
   }
